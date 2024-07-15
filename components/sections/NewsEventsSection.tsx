@@ -6,14 +6,21 @@ import Link from "next/link";
 import { client } from "@/sanity/lib/client";
 import { useLanguage } from "@/components/elements/LanguageContext";
 
+interface NewsItem {
+  _id: string;
+  title: string;
+  date: string;
+  imageUrl?: string;
+  content: { children: { text: string }[] }[];
+}
+
 const NewsEventsSection = () => {
   const { language } = useLanguage();
-
-  const [news, setNews] = useState([]);
+  const [news, setNews] = useState<NewsItem[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await client.fetch(`
+      const data: NewsItem[] = await client.fetch(`
         *[_type == "news"] | order(date desc) {
           _id,
           title,
@@ -27,7 +34,7 @@ const NewsEventsSection = () => {
     fetchData();
   }, []);
 
-  const getExcerpt = (blocks) => {
+  const getExcerpt = (blocks: { children: { text: string }[] }[]) => {
     if (!blocks || !blocks[0] || !blocks[0].children) return "";
     const text = blocks[0].children[0].text;
     const words = text.split(' ');

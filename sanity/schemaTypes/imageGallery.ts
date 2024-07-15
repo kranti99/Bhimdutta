@@ -1,4 +1,3 @@
-// schemas/imageGroup.js
 import { defineField, defineType } from 'sanity';
 
 export default defineType({
@@ -15,13 +14,11 @@ export default defineType({
           name: 'en',
           type: 'string',
           title: 'English Title',
-          optional: true,
         }),
         defineField({
           name: 'ne',
           type: 'string',
           title: 'Nepali Title',
-          optional: true,
         }),
       ],
     }),
@@ -42,15 +39,23 @@ export default defineType({
                   name: 'en',
                   type: 'string',
                   title: 'English Title',
-                  optional: true,
                 }),
                 defineField({
                   name: 'ne',
                   type: 'string',
                   title: 'Nepali Title',
-                  optional: true,
                 }),
               ],
+            }),
+            defineField({
+              name: 'link',
+              title: 'Link',
+              type: 'url',
+              description: 'Optional link to a resource or page',
+              validation: (Rule) => Rule.uri({
+                allowRelative: true, // Allow relative URLs
+                scheme: ['http', 'https', 'mailto', 'tel'] // Valid URL schemes
+              }),
             }),
           ],
         },

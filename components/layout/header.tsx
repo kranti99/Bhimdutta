@@ -1,5 +1,4 @@
-"use client";
-
+'use client';
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -7,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faEnvelope, faSearch, faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { faTwitter, faFacebook, faLinkedin, faYoutube } from "@fortawesome/free-brands-svg-icons";
 import { useLanguage } from '@/components/elements/LanguageContext';
-
 
 export default function HeaderComponent() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -42,9 +40,9 @@ export default function HeaderComponent() {
         </div>
         <div className="flex items-center space-x-4">
           <Link href='/contact'>
-          <button className="bg-secondary-400 text-black py-1 px-6 rounded-full hover:bg-secondary-600 hidden lg:block transition-all duration-300">
-            {language === 'ne' ? 'सम्पर्क/गुनासो ' : 'Contact/Complaint'}
-          </button>
+            <button className="bg-secondary-400 text-black py-1 px-6 rounded-full hover:bg-secondary-600 hidden lg:block transition-all duration-300">
+              {language === 'ne' ? 'सम्पर्क/गुनासो ' : 'Contact/Complaint'}
+            </button>
           </Link>
           <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="hover:text-gray-400">
             <FontAwesomeIcon icon={faTwitter} />
@@ -60,72 +58,65 @@ export default function HeaderComponent() {
           </a>
         </div>
       </div>
-      <div className={`transition-all duration-300 bg-primary-800 ${isSticky ?  'shadow-lg sticky top-0 z-50 py-2' : 'py-4'}`} style={{ top: isSticky ? '0' : '', position: isSticky ? 'fixed' : 'relative', width: '100%', left: '0' }}>
+      <div className={`transition-all duration-300 bg-primary-800 ${isSticky ? 'shadow-lg sticky top-0 z-50 py-2' : 'py-4'}`} style={{ top: isSticky ? '0' : '', position: isSticky ? 'fixed' : 'relative', width: '100%', left: '0' }}>
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center space-x-4">
             <Link href='/'><Image src="/logo.png" alt="CTEVT Logo" width={isSticky ? 50 : 60} height={isSticky ? 50 : 60} /></Link>
             <Link href='/'><h1 className="text-lg font-bold mb-0">
-            {language === 'ne' ? 'भीमदत्त बहुप्राविधिक शिक्षालय ' : 'Bhimdutta Polytechnic Institute'}
-            
+              {language === 'ne' ? 'भीमदत्त बहुप्राविधिक शिक्षालय ' : 'Bhimdutta Polytechnic Institute'}
             </h1></Link>
           </div>
           <nav className="hidden lg:flex items-center space-x-8">
-            <Link href="/" className="hover:text-gray-400"> 
+            <Link href="/" className="hover:text-gray-400">
               {language === 'ne' ? 'गृह' : 'Home'}
             </Link>
-            <Link href="/about" className="hover:text-gray-400">              {language === 'ne' ? 'हाम्रोबारे' : 'About Us'}
-            </Link>  
-            
-          <Link href="/news" className="hover:text-gray-400">
-          {language === 'ne' ? 'समाचार' : 'News/Events'}
-          </Link>
+            <Link href="/about" className="hover:text-gray-400">
+              {language === 'ne' ? 'हाम्रोबारे' : 'About Us'}
+            </Link>
+            <Link href="/news" className="hover:text-gray-400">
+              {language === 'ne' ? 'समाचार' : 'News/Events'}
+            </Link>
             <Link href="/notices" className="hover:text-gray-400">
-          {language === 'ne' ? 'सूचना' : 'Notice'}
-            
+              {language === 'ne' ? 'सूचना' : 'Notice'}
             </Link>
             <div className="relative group">
-                <button className="flex items-center hover:text-gray-400">
-          {language === 'ne' ? 'ग्यालेरी' : 'Gallery'}
-                 
-                  <svg className="ml-1 w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 16l-6-6h12l-6 6z" />
-                  </svg>
-                </button>
-                <div className="absolute hidden group-hover:block bg-white text-black mt-0 rounded-lg shadow-lg py-2 z-10 w-48">
-                  <Link href="/gallery/images" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 hover:bg-gray-200"> 
-          {language === 'ne' ? 'फोटो' : 'Images'}
-                  </Link>
-                  <Link href="/gallery/videos" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 hover:bg-gray-200">
-          {language === 'ne' ? 'भिडियो' : 'Videos'}
-                  
-                  </Link>
-                </div>
+              <button className="flex items-center hover:text-gray-400">
+                {language === 'ne' ? 'ग्यालेरी' : 'Gallery'}
+                <svg className="ml-1 w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 16l-6-6h12l-6 6z" />
+                </svg>
+              </button>
+              <div className="absolute hidden group-hover:block bg-white text-black mt-0 rounded-lg shadow-lg py-2 z-10 w-48">
+                <Link href="/gallery/images" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 hover:bg-gray-200">
+                  {language === 'ne' ? 'फोटो' : 'Images'}
+                </Link>
+                <Link href="/gallery/videos" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 hover:bg-gray-200">
+                  {language === 'ne' ? 'भिडियो' : 'Videos'}
+                </Link>
               </div>
+            </div>
             <Link href="/contact" className="hover:text-gray-400">
-          {language === 'ne' ? 'सम्पर्क' : 'Contact'}
-            
+              {language === 'ne' ? 'सम्पर्क' : 'Contact'}
             </Link>
             <div className="relative group">
-                <button className="flex items-center hover:text-gray-400" href="/about">
-          {language === 'ne' ? 'अन्य' : 'Others'}
-                 
-                  <svg className="ml-1 w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 16l-6-6h12l-6 6z" />
-                  </svg>
-                </button>
-                <div className="absolute hidden group-hover:block bg-white text-black mt-0 rounded-lg shadow-lg py-2 z-10 w-48">
-                  <Link href="/gallery/images" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 hover:bg-gray-200"> 
-          {language === 'ne' ? 'प्रधानाध्यापकको सन्देश' : 'Message From Principle'}
-                  </Link>
-                  <Link href="/team" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 hover:bg-gray-200">
-          {language === 'ne' ? 'हाम्रो टिम' : 'Our Team'}
-                  
-                  </Link>
-                </div>
+              <button className="flex items-center hover:text-gray-400">
+                {language === 'ne' ? 'अन्य' : 'Others'}
+                <svg className="ml-1 w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 16l-6-6h12l-6 6z" />
+                </svg>
+              </button>
+              <div className="absolute hidden group-hover:block bg-white text-black mt-0 rounded-lg shadow-lg py-2 z-10 w-48">
+                <Link href="/gallery/images" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 hover:bg-gray-200">
+                  {language === 'ne' ? 'प्रधानाध्यापकको सन्देश' : 'Message From Principle'}
+                </Link>
+                <Link href="/team" onClick={() => setIsMenuOpen(false)} className="block px-4 py-2 hover:bg-gray-200">
+                  {language === 'ne' ? 'हाम्रो टिम' : 'Our Team'}
+                </Link>
               </div>
+            </div>
           </nav>
           <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="lg:hidden text-white">
-            <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars}   style={{height:'1.5em'}}/>
+            <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} style={{ height: '1.5em' }} />
           </button>
         </div>
         {isMenuOpen && (

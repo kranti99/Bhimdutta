@@ -35,7 +35,9 @@ export default defineType({
       title: "Link",
       type: "url",
       description: "Optional link to a resource or page",
-      validation: (Rule) => Rule.uri().optional(), // Link is not mandatory
+      validation: (Rule) => Rule.uri({
+        scheme: ['http', 'https', 'mailto', 'tel']
+      }), // Link is not mandatory
     }),
   ],
 });

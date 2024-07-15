@@ -1,4 +1,3 @@
-// schemas/video.js
 import { defineField, defineType } from 'sanity';
 
 export default defineType({
@@ -15,13 +14,13 @@ export default defineType({
           name: 'en',
           type: 'string',
           title: 'English Title',
-          optional: true,
+          // no validation rule, making it optional
         }),
         defineField({
           name: 'ne',
           type: 'string',
           title: 'Nepali Title',
-          optional: true,
+          // no validation rule, making it optional
         }),
       ],
     }),

@@ -12,20 +12,25 @@ interface MarqueeItem {
   url: string;
 }
 
+interface NewsItem {
+  _id: string;
+  title: string;
+}
+
 function MarqueeComponent() {
   const [items, setItems] = useState<MarqueeItem[]>([]);
   const { language } = useLanguage();
 
   useEffect(() => {
     const fetchMarqueeItems = async () => {
-      const newsData = await client.fetch(`
+      const newsData: NewsItem[] = await client.fetch(`
         *[_type == "news"] | order(date desc) {
           _id,
           title
         }
       `);
 
-      const noticeData = await client.fetch(`
+      const noticeData: NewsItem[] = await client.fetch(`
         *[_type == "notice"] | order(date desc) {
           _id,
           title
