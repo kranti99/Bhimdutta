@@ -70,8 +70,8 @@ const VideoGallery = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {selectedVideos.map((video) => {
             const videoId = getYouTubeVideoId(video.url);
-            const thumbnailUrl = getYouTubeThumbnailUrl(videoId);
-            const embedUrl = videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+            const thumbnailUrl = getYouTubeThumbnailUrl(videoId) || '';
+            const embedUrl = videoId ? `https://www.youtube.com/embed/${videoId}` : '';
 
             return (
               <div key={video._id} className="relative" data-fancybox>
