@@ -1,14 +1,23 @@
-// components/Sidebar.jsx
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { client } from "@/sanity/lib/client";
 
+interface NewsItem {
+  _id: string;
+  title: string;
+  imageUrl?: string;
+}
 
-const Sidebar = () => {
-  const [latestNews, setLatestNews] = useState([]);
-  const [latestNotices, setLatestNotices] = useState([]);
-  const [popularTags, setPopularTags] = useState([]);
+interface NoticeItem {
+  _id: string;
+  title: string;
+}
+
+const Sidebar: React.FC = () => {
+  const [latestNews, setLatestNews] = useState<NewsItem[]>([]);
+  const [latestNotices, setLatestNotices] = useState<NoticeItem[]>([]);
+  const [popularTags, setPopularTags] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchSidebarData = async () => {
@@ -39,7 +48,7 @@ const Sidebar = () => {
     <aside className="w-full md:w-1/3 mt-8 md:mt-0">
       <section className="mb-8">
         <h3 className="text-2xl font-bold mb-4">Latest News</h3>
-        <ul style={{listStyle:'none'}}>
+        <ul style={{ listStyle: 'none' }}>
           {latestNews.map((item) => (
             <li key={item._id} className="mb-4 border-b-1">
               <Link href={`/news/${item._id}`} className="flex items-center">
@@ -60,8 +69,6 @@ const Sidebar = () => {
           ))}
         </ul>
       </section>
-
-
     </aside>
   );
 };

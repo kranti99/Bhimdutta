@@ -6,8 +6,14 @@ import PageHeader from "@/components/elements/pageTitle";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
+interface Video {
+  _id: string;
+  title: { [key: string]: string } | null;
+  url: string;
+}
+
 const VideoGallery = () => {
-  const [videos, setVideos] = useState([]);
+  const [videos, setVideos] = useState<Video[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const { language } = useLanguage();
 
@@ -15,7 +21,7 @@ const VideoGallery = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await client.fetch(`
+      const data = await client.fetch<Video[]>(`
         *[_type == "video"] {
           _id,
           title,
@@ -28,13 +34,13 @@ const VideoGallery = () => {
     fetchData();
   }, [language]);
 
-  const getYouTubeVideoId = (url) => {
+  const getYouTubeVideoId = (url: string): string | null => {
     if (!url) return null;
     const urlObj = new URL(url);
     return urlObj.searchParams.get('v');
   };
 
-  const getYouTubeThumbnailUrl = (videoId) => {
+  const getYouTubeThumbnailUrl = (videoId: string | null): string | null => {
     if (!videoId) return null;
     return `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
   };

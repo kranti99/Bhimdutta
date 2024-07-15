@@ -9,8 +9,21 @@ import { useLanguage } from '@/components/elements/LanguageContext';
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
-const AboutUsSection = () => {
-  const [aboutData, setAboutData] = useState(null);
+interface Block {
+  _type: string;
+  children: Array<{ text: string }>;
+}
+
+interface Description {
+  [key: string]: Block[];
+}
+
+interface AboutData {
+  description: Description;
+}
+
+const AboutUsSection: React.FC = () => {
+  const [aboutData, setAboutData] = useState<AboutData | null>(null);
   const { language } = useLanguage();
 
   useEffect(() => {
@@ -91,10 +104,10 @@ const AboutUsSection = () => {
         <div className="w-full md:w-3/5 flex flex-col justify-center pl-8">
           <div className="mb-8">
             <h2 className="text-xl text-purple-600 font-semibold mb-2">
-                {language === 'ne' ? 'आजीवन शिक्षाको प्रवेशद्वार ' : 'Gateway to Lifelong Learning'}
+              {language === 'ne' ? 'आजीवन शिक्षाको प्रवेशद्वार ' : 'Gateway to Lifelong Learning'}
             </h2>
             <h1 className="text-4xl text-black font-bold mb-4">
-            {language === 'ne' ? 'भीमदत्त बहुप्राविधिक शिक्षालय ' : 'Bhimdutta Polytechnic Institute'}
+              {language === 'ne' ? 'भीमदत्त बहुप्राविधिक शिक्षालय ' : 'Bhimdutta Polytechnic Institute'}
             </h1>
             <p className="text-gray-700 mb-8">
               {description.slice(0, 400)}...

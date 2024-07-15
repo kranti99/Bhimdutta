@@ -6,13 +6,23 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { useLanguage } from "@/components/elements/LanguageContext"; // Make sure the path is correct
 
-const CarouselComponent = () => {
-  const [slides, setSlides] = useState([]);
+interface Slide {
+  _id: string;
+  title: {
+    en: string;
+    ne: string;
+  };
+  imageUrl: string;
+  link?: string;
+}
+
+const CarouselComponent: React.FC = () => {
+  const [slides, setSlides] = useState<Slide[]>([]);
   const { language } = useLanguage();
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await client.fetch(`
+      const data: Slide[] = await client.fetch(`
         *[_type == "carousel"] | order(_createdAt desc) {
           _id,
           title {
@@ -61,7 +71,7 @@ const CarouselComponent = () => {
         <FontAwesomeIcon icon={faChevronLeft} />
       </button>
     ),
-    appendDots: (dots) => (
+    appendDots: (dots: React.ReactNode) => (
       <div
         style={{ bottom: "-30px" }}
         className="absolute w-full flex justify-center"
@@ -69,7 +79,7 @@ const CarouselComponent = () => {
         <ul className="flex space-x-2">{dots}</ul>
       </div>
     ),
-    customPaging: (i) => (
+    customPaging: (i: number) => (
       <button
         className="w-4 h-4 bg-primary-800 rounded-full focus:outline-none"
       />
@@ -80,7 +90,7 @@ const CarouselComponent = () => {
     <div className="homeSlider relative w-full mx-auto overflow-hidden mt-6 mb-6 pb-3 bg-white shadow-xl rounded-lg">
       <Slider {...settings}>
         {slides.map((slide, index) => (
-          <div key={index} className="relative">
+          <div key={slide._id} className="relative">
             <img
               src={slide.imageUrl}
               alt={`Slide ${index + 1}`}

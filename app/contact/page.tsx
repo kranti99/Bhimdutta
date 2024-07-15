@@ -1,4 +1,5 @@
-'use client';
+"use client";
+
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faEnvelope, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
@@ -16,7 +17,7 @@ const ContactPage = () => {
     message: '',
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -24,7 +25,7 @@ const ContactPage = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Here you can handle form submission logic, such as sending data to a server or displaying it.
     console.log(formData); // Example: Log form data to console
@@ -134,7 +135,7 @@ const ContactPage = () => {
                 <textarea
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="message"
-                  rows="5"
+                  rows={5}
                   placeholder={language === 'ne' ? 'सन्देश' : 'Message'}
                   name="message"
                   value={formData.message} // Bind value to state
@@ -159,7 +160,6 @@ const ContactPage = () => {
                 width="600"
                 height="450"
                 style={{ border: 0 }}
-                allowFullScreen=""
                 loading="lazy"
               ></iframe>
             </div>

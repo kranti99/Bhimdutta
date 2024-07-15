@@ -1,9 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, MouseEvent } from 'react';
 import { client, urlFor } from '@/lib/sanity';
 
+interface PopupProps {
+  onClose: () => void;
+}
 
-const Popup = ({ onClose }) => {
-  const [popups, setPopups] = useState([]);
+interface PopupData {
+  imageUrl?: string;
+}
+
+const Popup: React.FC<PopupProps> = ({ onClose }) => {
+  const [popups, setPopups] = useState<PopupData[]>([]);
   const [currentPopupIndex, setCurrentPopupIndex] = useState(0);
 
   useEffect(() => {
@@ -24,11 +31,11 @@ const Popup = ({ onClose }) => {
     }
   };
 
-  const handlePopupClick = (e) => {
+  const handlePopupClick = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation(); // Prevent closing when clicking inside the popup
   };
 
-  const handleOutsideClick = (e) => {
+  const handleOutsideClick = (e: MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) {
       handleNextPopup();
     }
@@ -43,7 +50,8 @@ const Popup = ({ onClose }) => {
         index === currentPopupIndex && (
           <div
             key={index}
-            className="relative bg-white rounded-lg overflow-hidden shadow-lg m-4 max-w-2xl transition-transform transform scale-100 duration-300 ease-out" style={{maxHeight:'96vh'}}
+            className="relative bg-white rounded-lg overflow-hidden shadow-lg m-4 max-w-2xl transition-transform transform scale-100 duration-300 ease-out"
+            style={{ maxHeight: '96vh' }}
             onClick={handlePopupClick}
           >
             {popup.imageUrl && (

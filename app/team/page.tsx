@@ -5,15 +5,22 @@ import { client } from "@/sanity/lib/client";
 import PageHeader from "@/components/elements/pageTitle";
 import { useLanguage } from '@/components/elements/LanguageContext';
 
+interface TeamMember {
+  _id: string;
+  name: string;
+  jobTitle: string;
+  imageUrl: string;
+}
+
 const TeamMembers = () => {
-  const [teamMembers, setTeamMembers] = useState([]);
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const membersPerPage = 12;
   const { language } = useLanguage();
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await client.fetch(`
+      const data = await client.fetch<TeamMember[]>(`
         *[_type == "teamMember"] {
           _id,
           name,
@@ -28,7 +35,7 @@ const TeamMembers = () => {
 
   const totalPages = Math.ceil(teamMembers.length / membersPerPage);
 
-  const handlePageChange = (page) => {
+  const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 

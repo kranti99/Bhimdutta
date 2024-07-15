@@ -9,8 +9,20 @@ import PageHeader from "@/components/elements/pageTitle";
 import { Fancybox } from "@fancyapps/ui";
 import "@fancyapps/ui/dist/fancybox/fancybox.css";
 
+interface Image {
+  _key: string;
+  imageUrl: string;
+  title: { [key: string]: string } | null;
+}
+
+interface ImageGroup {
+  _id: string;
+  title: { [key: string]: string } | null;
+  images: Image[];
+}
+
 const ImageGallery = () => {
-  const [groups, setGroups] = useState([]);
+  const [groups, setGroups] = useState<ImageGroup[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
   const { language } = useLanguage();
 
@@ -19,7 +31,7 @@ const ImageGallery = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await client.fetch(`
+      const data = await client.fetch<ImageGroup[]>(`
         *[_type == "imageGroup"] {
           _id,
           title,
